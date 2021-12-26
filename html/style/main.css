@@ -3,8 +3,8 @@
 
 * {
 	font-family: 'JetBrains	Mono', monospace;
-	--primary-color: #5CDB95;
-	--secondary-color: #053361;
+	--primary-color: hsl(147,63.8%,61%);
+	--secondary-color: hsl(210,90.2%,20%);
 	background-color: var(--primary-color);
 }
 
