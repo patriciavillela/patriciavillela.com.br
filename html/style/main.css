@@ -27,3 +27,8 @@ header h1 span {
 header h2 {
 	font-size: 0.3em;
 }
+
+.selected {
+	background-color: var(--secondary-color);
+	color: var(--primary-color);
+}

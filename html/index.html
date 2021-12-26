@@ -27,21 +27,26 @@
 			var compositora = document.querySelector("#compositora");
 			var programadora = document.querySelector("#programadora");
 			var atriz = document.querySelector("#atriz");
+			var label_ele = document.querySelector("#ele");
+			var label_ela = document.querySelector("#ela");
 
-			document.getElementById("ele").addEventListener('click',ele);
-			document.getElementById("ela").addEventListener('click',ela);
+			label_ele.addEventListener('click',ele);
+			label_ela.addEventListener('click',ela);
 			function ele() {
 				apresentacao.innerText = "Patrick. Programador, compositor, ator.";
 				compositora.innerText = "Compositor";
 				programadora.innerText = "Programador";
 				atriz.innerText = "Ator";
+				label_ele.classList.add("selected");
+				label_ela.classList.remove("selected");
 			}
 			function ela() {
 				apresentacao.innerText = "Patty. Programadora, compositora, atriz.";
 				compositora.innerText = "Compositora";
 				programadora.innerText = "Programadora";
 				atriz.innerText = "Atriz";
-
+				label_ela.classList.add("selected");
+				label_ele.classList.remove("selected");
 			}
 			Math.random() > 0.5 ? ele() : ela();
 		</script>
