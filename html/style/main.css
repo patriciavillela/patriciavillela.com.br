@@ -3,12 +3,14 @@
 
 * {
 	font-family: 'JetBrains	Mono', monospace;
-	background-color: #5CDB95;
+	--primary-color: #5CDB95;
+	--secondary-color: #053361;
+	background-color: var(--primary-color);
 }
 
 header {
 	font-size: 3rem;
-	color: #05386B;
+	color: var(--secondary-color);
 }
 
 header h1 {
