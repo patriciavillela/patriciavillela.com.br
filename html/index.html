@@ -10,15 +10,38 @@
 			<h2>Página pessoal</h2>
 		</header>
 		<main>
+			<p id="apresentacao"></p>
+			<h2>Trabalhos</h2>
+			<h3 id="compositora"></h3>
+			<p>Estou no presente momento trabalhando numa ópera curta sobre o início e o fim de um casamento chamada "A Morte Floresce nas Ruínas de um Casamento".</p>
+			<p>Tentando também entender como se registra uma composição para comissionar algumas obras prontas, como "Seus Olhos" e "202X".</p>
+			<h3 id="programadora"></h3>
+			<p>Trabalho como Software Development Engineer na Amazon.</p>
+			<p>Tentando também aprender APL.</p>
+			<h3 id="atriz"></h3>
+			<p>No momento esperando a pandemia dar uma trégua para voltar com os planos de montar um grupo.</p>
+			<p>Esperando para pegar meu DRT.</p>
 		</main>
 		<script>
+			var apresentacao = document.querySelector("#apresentacao");
+			var compositora = document.querySelector("#compositora");
+			var programadora = document.querySelector("#programadora");
+			var atriz = document.querySelector("#atriz");
+
 			document.getElementById("ele").addEventListener('click',ele);
 			document.getElementById("ela").addEventListener('click',ela);
 			function ele() {
-				document.querySelector("main").innerText = "Patrick. Programador, compositor, ator.";
+				apresentacao.innerText = "Patrick. Programador, compositor, ator.";
+				compositora.innerText = "Compositor";
+				programadora.innerText = "Programador";
+				atriz.innerText = "Ator";
 			}
 			function ela() {
-				document.querySelector("main").innerText = "Patty. Programadora, compositora, atriz.";
+				apresentacao.innerText = "Patty. Programadora, compositora, atriz.";
+				compositora.innerText = "Compositora";
+				programadora.innerText = "Programadora";
+				atriz.innerText = "Atriz";
+
 			}
 			Math.random() > 0.5 ? ele() : ela();
 		</script>
