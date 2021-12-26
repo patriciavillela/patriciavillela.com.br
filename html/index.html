@@ -2,13 +2,25 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Página de patrickvob</title>
+		<link rel="stylesheet" href="style/main.css">
 	</head>
 	<body>
 		<header>
-			<h1>patrickvob</h1>
+			<h1>patrickvob (<span id="ele">ele</span>/<span id="ela">ela</span>)</h1>
 			<h2>Página pessoal</h2>
 		</header>
 		<main>
 		</main>
+		<script>
+			document.getElementById("ele").addEventListener('click',ele);
+			document.getElementById("ela").addEventListener('click',ela);
+			function ele() {
+				document.querySelector("main").innerText = "Patrick. Programador, compositor, ator.";
+			}
+			function ela() {
+				document.querySelector("main").innerText = "Patty. Programadora, compositora, atriz.";
+			}
+			Math.random() > 0.5 ? ele() : ela();
+		</script>
 	</body>
 </html>
