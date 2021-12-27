@@ -1,11 +1,5 @@
 const { Client } = require('pg');
-const client = new Client({
-	user: 'website',
-	host: 'localhost',
-	database: 'patrickvob.com.br',
-	password: '123456',
-	port: 5432
-});
+const client = new Client();
 client.connect();
 
 async function getContent() {
