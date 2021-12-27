@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Página de patrickvob</title>
+		<link rel="stylesheet" href="style/main.css">
+	</head>
+	<body>
+		<header>
+			<h1><span id="titulo_da_pagina"></span> (<span id="m" class="gender"></span>/<span id="f" class="gender"></span>)(<span id="pt" class="language">pt</span>/<span id="en" class="language">en</span>)</h1>
+			<h2><span id="subtitulo">Página pessoal</span></h2>
+		</header>
+		<main>
+			<p id="introducao"></p>
+			<h3><span id="trabalhos_header"></span></h3>
+			<h4><span id="compositor_header"></span></h4>
+			<span id="compositor_body"></span>
+			<h4><span id="programador_header"></span></h4>
+			<span id="programador_body"></span>
+			<h4><span id="ator_header"></span></h4>
+			<span id="ator_body"></span>
+		</main>
+		<script>
+			Math.random() >= 0.5 ? gender = 'f' : gender = 'm';
+			language = 'pt';
+			document.getElementById("m").addEventListener('click',function(){gender = 'm';build()});
+			document.getElementById("f").addEventListener('click',function(){gender='f';build()});
+			document.getElementById("pt").addEventListener('click',function(){language='pt';build()});
+			document.getElementById("en").addEventListener('click',function(){language='en';build()});
+			[[node_script]]
+			function build() {
+				window["build_"+gender+"_"+language]();
+				document.querySelectorAll(".gender").forEach(el => el.classList.remove("selected"));
+				document.querySelectorAll(".language").forEach(el => el.classList.remove("selected"));
+				document.getElementById(gender).classList.add("selected");
+				document.getElementById(language).classList.add("selected");
+			}
+			build();
+		</script>
+	</body>
+</html>
