@@ -60,6 +60,9 @@ const server = http.createServer(async (req, res) => {
 				persist(body);
 				res.end("ok")
 			});
+			res.writeHead(301, {Location:'http://patrickvob.com.br/admin.html'});
+			res.end();
+
 		} else {
 			html = await getFile(__dirname + url);
 			if(url == "/index.html")
@@ -68,9 +71,9 @@ const server = http.createServer(async (req, res) => {
 				html = await buildAdmin(html,content);
 			else if(url == "/save")
 				html = "SAVE";
+			res.writeHead(200);
+			res.end(html);
 		}
-		res.writeHead(200);
-		res.end(html);
 	} catch {
 		res.writeHead(404);
 		return;
