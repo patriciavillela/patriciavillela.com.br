@@ -27,7 +27,7 @@ function persist(data) {
 	obj.element_id = data[1].split("=")[1];
 	obj.gender = data[2].split("=")[1];
 	obj.language = data[3].split("=")[1];
-	obj.string = data[5].split("=")[1];
+	obj.string = decodeURIComponent(data[5].split("=")[1]).replaceAll("+"," ");
 	obj.depth = data[4].split("=")[1];
 	db.createContent(obj);
 }
