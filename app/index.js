@@ -41,7 +41,7 @@ function buildScript(html, map) {
 	for(let gender of genders) {
 		for(let language of languages) {
 			string += "function build_"+gender+"_"+language+"() {\n";
-			string += map.filter(item=>item.gender == gender || item.gender == null).filter(item=>item.language == language || item.language == null).map(item=>"document.getElementById('"+item.element_id+"').innerHTML='"+item.string+"';").join("\n");
+			string += map.filter(item=>item.gender == gender || item.gender == null).filter(item=>item.language == language || item.language == null).map(item=>"if(document.getElementById('"+item.element_id+"')) document.getElementById('"+item.element_id+"').innerHTML='"+item.string+"';").join("\n");
 			string += "}\n";
 		}
 	}
