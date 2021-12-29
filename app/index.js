@@ -15,7 +15,7 @@ async function buildAdmin(html, content) {
 	table += fields.map(field => "<th>"+field+"</th>").join("");
 	table += "</tr>";
 	rows = content.rows;
-	table += rows.map(row => "<tr><td>"+row.content_id+"</td><td>"+row.page+"</td><td>"+row.element_id+"</td><td>"+row.gender+"</td><td>"+row.language+"</td><td>"+row.string+"</td><td>"+row.depth+"</td></tr>").join("");
+	table += rows.map(row => "<tr><td>"+row.content_id+"</td><td>"+row.page+"</td><td>"+row.element_id+"</td><td>"+row.gender+"</td><td>"+row.language+"</td><td>"+row.string.replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td><td>"+row.depth+"</td></tr>").join("");
 	return html.replace('[[table]]',table);
 }
 
