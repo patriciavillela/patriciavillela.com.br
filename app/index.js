@@ -11,10 +11,10 @@ async function getFile(file) {
 
 async function buildAdmin(html, content) {
 	table = "<table><tr>";
-	table += "<th>page</th><th>element_id</th><th>gender</th><th>language</th><th>depth</th><th>string</th><th>password</th><th>content_id</th>";
+	table += "<th>page</th><th>element_id</th><th>gender</th><th>language</th><th>string</th><th>password</th><th>content_id</th>";
 	table += "</tr>";
 	rows = content.rows;
-	table += rows.map(row => "<form action='/edit' method='post'><tr><td><input id='page' name='page' value='"+row.page+"'></td><td><input id='element_id' name='element_id' value='"+row.element_id+"'></td><td><input id='gender' name='gender' value='"+row.gender+"'></td><td><input id='language' name='language' value='"+row.language+"'></td><td><input id='depth' name='depth' value='"+row.depth+"'></td><td><textarea id='string' name='string'>"+row.string.replaceAll("<","&lt;").replaceAll(">","&gt;")+"</textarea></td><td><input name='password' id='password' name='password'></td><td><input id='content_id' name='content_id' value='"+row.content_id+"'></td><td><input type='submit' value='Save'></td></tr></form>").join("").replaceAll("value='null'","value='NULL'");
+	table += rows.map(row => "<form action='/edit' method='post'><tr><td><input id='page' name='page' value='"+row.page+"'></td><td><input id='element_id' name='element_id' value='"+row.element_id+"'></td><td><input id='gender' name='gender' value='"+row.gender+"'></td><td><input id='language' name='language' value='"+row.language+"'></td><td><textarea id='string' name='string'>"+row.string.replaceAll("<","&lt;").replaceAll(">","&gt;")+"</textarea></td><td><input name='password' id='password' name='password'></td><td><input id='content_id' name='content_id' value='"+row.content_id+"'></td><td><input type='submit' value='Save'></td></tr></form>").join("").replaceAll("value='null'","value='NULL'");
 	return html.replace('[[table]]',table);
 }
 
@@ -25,10 +25,9 @@ function buildObjectFromData(data) {
 	obj.element_id = data[1].split("=")[1];
 	obj.gender = data[2].split("=")[1];
 	obj.language = data[3].split("=")[1];
-	obj.string = decodeURIComponent(data[5].split("=")[1]).replaceAll("+"," ");
-	obj.depth = data[4].split("=")[1];
-	obj.password = data[6].split("=")[1];
-	if(data[7]) obj.content_id = data[7].split("=")[1];
+	obj.string = decodeURIComponent(data[4].split("=")[1]).replaceAll("+"," ");
+	obj.password = data[5].split("=")[1];
+	if(data[7]) obj.content_id = data[6].split("=")[1];
 	return obj;
 }
 
@@ -44,21 +43,26 @@ function persist(data) {
 	db.createContent(obj);
 }
 
-function buildScript(html, map) {
-	deepest = map.map(row=>row.depth).reduce((largest,current)=>largest>current?largest:current);
-	sortedMap = map.sort((a,b)=>a.depth-b.depth);
-	genders = new Set(map.map(item=>item.gender).filter(Boolean));
-	languages = new Set(map.map(item=>item.language).filter(Boolean));
+function buildOrderedScript(map) {
 	string = "";
-	for(let gender of genders) {
-		for(let language of languages) {
-			string += "function build_"+gender+"_"+language+"() {\n";
-			string += map.filter(item=>item.gender == gender || item.gender == null).filter(item=>item.language == language || item.language == null).map(item=>"if(document.getElementById('"+item.element_id+"')) document.getElementById('"+item.element_id+"').innerHTML='"+item.string+"';").join("\n");
-			string += "}\n";
-		}
-	}
-	return html.replace("[[node_script]]",string);
+	console.log(string);
+	new Set(map.map(item=>item.gender).filter(Boolean)).forEach(function(gender) {
+		new Set(map.map(item=>item.language).filter(Boolean)).forEach(function(language) {
+			filteredMap = map.filter(item=>(item.gender==gender||item.gender==null)&&(item.language==language||item.language==null));
+			filteredMap.forEach(function(item) {
+				if(!item.depth) item.depth = 0;
+				matches = item.string.match(/(?<=id=\")\w+/g);
+				if(matches) matches.forEach(function(id) {
+					filteredMap.filter(row=>row.element_id==id)[0].depth = item.depth + 1;	
+				});
+			});
+			orderedFilteredMap = filteredMap.sort((a,b)=>a.depth-b.depth);
+			string += "function build_"+gender+"_"+language+"(){\n"+orderedFilteredMap.map(row=>"if(document.getElementById('"+row.element_id+"')) document.getElementById('"+row.element_id+"').innerHTML='"+row.string+"';").join("\n")+"\n}\n";
+		});
+	});
+	return string;
 }
+
 
 const server = http.createServer(async (req, res) => {
 	if(req.url == "/") url = "/index.html";
@@ -86,7 +90,7 @@ const server = http.createServer(async (req, res) => {
 		} else {
 			html = await getFile(__dirname + url);
 			if(url == "/index.html")
-				html = buildScript(html,content.rows);
+				html = html.replace("[[node_script]]",buildOrderedScript(content.rows));
 			else if(url == "/admin.html")
 				html = await buildAdmin(html,content);
 			else if(url == "/save")
