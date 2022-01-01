@@ -67,7 +67,7 @@ function buildOrderedScript(map) {
 const server = http.createServer(async (req, res) => {
 	if(req.url == "/") url = "/index.html";
 	else url = req.url;
-	content = await db.getContent();
+	content = await db.getContent(url);
 	try {
 		if(url == "/save") {
 			let body = '';
