@@ -3,8 +3,14 @@
     src: url('SourceCodePro-VariableFont_wght.ttf');
 }
 
+:root {
+    --primary-color: hsl(0, 0%, 95%, 1);
+    --secondary-color: black;
+}
+
 body {
     font-family: 'Source Code Pro';
+    background-color: var(--primary-color);
 }
 
 img {
@@ -16,4 +22,35 @@ img {
 h1 {
     display: flex;
     align-items: center;
+}
+
+h2 {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+header {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+footer {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+footer ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+footer ul a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 800;
 }
