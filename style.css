@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Source Code Pro';
+    src: url('SourceCodePro-VariableFont_wght.ttf');
+}
+
+body {
+    font-family: 'Source Code Pro';
+}
+
+img {
+    width: 100px;
+    border-radius: 50%;
+    margin: 15px;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+}
