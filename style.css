@@ -3,12 +3,14 @@
     src: url('SourceCodePro-VariableFont_wght.ttf');
 }
 
-:root {
-    --primary-color: hsl(0, 0%, 95%, 1);
-    --secondary-color: hsl(0, 0%, 0%, 1);
-    --tertiary-color: hsl(0, 0%, 30%, 1);
-    --header-background-color: var(--secondary-color);
-    --text-color: var(--secondary-color);
+@media (prefers-color-scheme: light) {
+    :root {
+        --primary-color: hsl(0, 0%, 95%, 1);
+        --secondary-color: hsl(0, 0%, 0%, 1);
+        --tertiary-color: hsl(0, 0%, 30%, 1);
+        --header-background-color: var(--secondary-color);
+        --text-color: var(--secondary-color);
+    }
 }
 
 @media (prefers-color-scheme: dark) {
