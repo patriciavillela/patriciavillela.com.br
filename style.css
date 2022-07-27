@@ -5,12 +5,15 @@
 
 :root {
     --primary-color: hsl(0, 0%, 95%, 1);
-    --secondary-color: black;
+    --secondary-color: hsl(0, 0%, 0%, 1);
+    --tertiary-color: hsl(0, 0%, 30%, 1);
 }
 
 body {
     font-family: 'Source Code Pro';
     background-color: var(--primary-color);
+    max-width: 1000px;
+    margin: auto;
 }
 
 img {
@@ -26,6 +29,11 @@ h1 {
 
 h2 {
     background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+h3 {
+    background-color: var(--tertiary-color);
     color: var(--primary-color);
 }
 
