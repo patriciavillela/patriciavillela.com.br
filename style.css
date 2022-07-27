@@ -35,6 +35,18 @@ img {
     margin: 15px;
 }
 
+header p {
+    padding-left: 5px;
+}
+
+h2, h3 {
+    padding-left: 5px;
+}
+
+section p {
+    padding-left: 15px;
+}
+
 h1 {
     display: flex;
     align-items: center;
