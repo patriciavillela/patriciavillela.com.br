@@ -45,8 +45,16 @@ h2, h3 {
     padding-left: 5px;
 }
 
-section p {
+h4 {
+    padding-left: 10px;
+}
+
+section p, section ul {
     padding-left: 15px;
+}
+
+li {
+    list-style-type: none;
 }
 
 h1 {
