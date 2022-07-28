@@ -53,8 +53,16 @@ section p, section ul {
     padding-left: 15px;
 }
 
+section div {
+    display: none;
+}
+
 li {
     list-style-type: none;
+}
+
+h2, h3 {
+    cursor: pointer;
 }
 
 h1 {
