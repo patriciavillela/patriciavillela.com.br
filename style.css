@@ -45,6 +45,15 @@ h2, h3 {
     padding-left: 5px;
 }
 
+h2.fechado::before, h3.fechado::before {
+    content: '➤';
+    font-size: 15px;
+}
+
+h2.aberto::before, h3.aberto::before {
+    content: '▼';
+}
+
 h4 {
     padding-left: 10px;
 }
