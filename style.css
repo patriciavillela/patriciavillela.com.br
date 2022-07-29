@@ -46,12 +46,11 @@ h2, h3 {
 }
 
 h2.fechado::before, h3.fechado::before {
-    content: '➤';
-    font-size: 15px;
+    content: '+';
 }
 
 h2.aberto::before, h3.aberto::before {
-    content: '▼';
+    content: '-';
 }
 
 h4 {
