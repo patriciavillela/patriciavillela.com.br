@@ -62,7 +62,7 @@ section p {
 }
 
 section div {
-    display: none;
+    display: block;
 }
 
 footer li {
