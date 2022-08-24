@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<title>BDSM Test Compatibility</title>
+		<script>
+			const comparisonMap = {
+				"Non-monogamist": "Non-monogamist",
+				"Switch": "Switch",
+				"Ageplayer": "Ageplayer",
+				"Dominant": "Submissive",
+				"Submissive": "Dominant",
+				"Masochist": "Sadist",
+				"Sadist": "Masochist",
+				"Degrader": "Degradee",
+				"Degradee": "Degrader",
+				"Primal (Hunter)": "Primal (Prey)",
+				"Primal (Prey)": "Primal (Hunter)",
+				"Vanilla": "Experimentalist",
+				"Experimentalist": "Vanilla",
+				"Voyeur": "Exhibitionist",
+				"Exhibitionist": "Voyeur",
+				"Rope bunny": "Rigger",
+				"Rigger": "Rope bunny",
+				"Brat": "Brat tamer",
+				"Brat tamer": "Brat",
+				"Owner": "Pet",
+				"Pet": "Owner",
+				"Master/Mistress": "Slave",
+				"Slave": "Master/Mistress",
+				"Daddy/Mommy": "Boy/Girl",
+				"Boy/Girl": "Daddy/Mommy"
+			}
+			function compare() {
+				let your_result = document.getElementById("your_result").value
+				let other_result = document.getElementById("other_result").value
+
+				var your_object = {};
+				your_result.split("\n").slice(1)
+					.forEach(el => {
+						let values = el.trim().split(" ")
+						let percent = values.shift()
+						let category = values.join(" ")
+						your_object[category] = percent
+					});
+
+				var other_object = {};
+				other_result.split("\n").slice(1)
+					.forEach(el => {
+						let values = el.trim().split(" ")
+						let percent = values.shift()
+						let category = values.join(" ")
+						other_object[category] = percent
+					});
+
+				var comparison = [];
+				for(category in comparisonMap) {
+					comparison.push(`<tr><td>${category}</td><td>${your_object[category]}</td><td>${other_object[comparisonMap[category]]}</td><td>${comparisonMap[category]}</td></tr>`)
+				}
+
+				document.getElementById("comparison").innerHTML = `
+					<table border="1">
+						<thead>
+							<tr>
+								<th colspan="2">Your results</td>
+								<th colspan="2">The other person's results</td>
+							</tr>
+						</thead>
+						<tbody>
+							${comparison.join("\n")}
+						</tbody>
+					</table>
+				`
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<span>Your results</span>
+			<textarea placeholder="Paste your bdsmtest.org results here" name="your_result" id="your_result" cols="30" rows="10"></textarea>
+		</div>
+		<div>
+			<span>The other results</span>
+			<textarea placeholder="Paste the other bdsmtest.org results here" name="other_result" id="other_result" cols="30" rows="10"></textarea>
+		</div>
+		<button onclick="compare()">Compare</button>
+		<div id="comparison"></div>
+	</body>
+</html>
