@@ -1,6 +1,11 @@
 <html>
 	<head>
 		<title>BDSM Test Compatibility</title>
+		<style>
+			.percent {
+				text-align: center;
+			}
+		</style>
 		<script>
 			const comparisonMap = {
 				"Non-monogamist": "Non-monogamist",
@@ -53,15 +58,17 @@
 
 				var comparison = [];
 				for(category in comparisonMap) {
-					comparison.push(`<tr><td>${category}</td><td>${your_object[category]}</td><td>${other_object[comparisonMap[category]]}</td><td>${comparisonMap[category]}</td></tr>`)
+					let difference = Math.abs(parseInt(your_object[category]) - parseInt(other_object[comparisonMap[category]]))
+					comparison.push(`<tr><td>${category}</td><td class="percent">${your_object[category]}</td><td class="percent">${difference}%</td><td class="percent">${other_object[comparisonMap[category]]}</td><td>${comparisonMap[category]}</td></tr>`)
 				}
 
 				document.getElementById("comparison").innerHTML = `
 					<table border="1">
 						<thead>
 							<tr>
-								<th colspan="2">Your results</td>
-								<th colspan="2">The other person's results</td>
+								<th colspan="2">Your results</th>
+								<th>Diferença</th>
+								<th colspan="2">The other person's results</th>
 							</tr>
 						</thead>
 						<tbody>
